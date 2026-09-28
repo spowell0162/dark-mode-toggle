@@ -1,30 +1,40 @@
 const darkModeToggle = document.querySelector('.dark-mode-toggle');
 const body = document.body;
 
-if (localStorage.getItem('theme') === 'dark') {
-    body.classList.add('dark');
-    darkModeToggle.classList.add('active');
+const applyDarkMode = function() {
+    if (!body.classList.contains('dark')) {
+        body.classList.add('dark');
+    };
+    if (!darkModeToggle.classList.contains('active')) {
+        darkModeToggle.classList.add('active');
+    };
     darkModeToggle.textContent = 'Light Mode';
-} else if (localStorage.getItem('theme') === 'light') {
-    body.classList.remove('dark');
-    darkModeToggle.classList.remove('active');
+};
+
+const applyLightMode = function() {
+    if (body.classList.contains('dark')) {
+        body.classList.remove('dark');
+    };
+    if (darkModeToggle.classList.contains('active')) {
+        darkModeToggle.classList.remove('active');
+    }
     darkModeToggle.textContent = 'Dark Mode';
+};
+
+if (localStorage.getItem('theme') === 'dark') {
+    applyDarkMode();
+} else if (localStorage.getItem('theme') === 'light') {
+    applyLightMode();
 };
 
 darkModeToggle.addEventListener('click', function () {
     if (localStorage.getItem('theme') === 'light' || localStorage.getItem('theme') === null) {
-        body.classList.add('dark');
-        darkModeToggle.classList.add('active');
-        darkModeToggle.textContent = 'Light Mode';
+        applyDarkMode();
         localStorage.setItem('theme', 'dark')
-        console.log(localStorage.getItem('theme'));
-        
     } else if (localStorage.getItem('theme') === 'dark') {
-        body.classList.remove('dark');
-        darkModeToggle.classList.remove('active');
-        darkModeToggle.textContent = 'Dark Mode';
+        applyLightMode();
         localStorage.setItem('theme', 'light');
-        console.log(localStorage.getItem('theme'));
-        
     }
 });
+
+// Code can be cleaner,swapping the if statements with a ternary operator and using a single function to toggle the theme.
