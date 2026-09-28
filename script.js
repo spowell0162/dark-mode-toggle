@@ -1,21 +1,30 @@
 const darkModeToggle = document.querySelector('.dark-mode-toggle');
 const body = document.body;
-let theme = 'light';
+
+if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark');
+    darkModeToggle.classList.add('active');
+    darkModeToggle.textContent = 'Light Mode';
+} else if (localStorage.getItem('theme') === 'light') {
+    body.classList.remove('dark');
+    darkModeToggle.classList.remove('active');
+    darkModeToggle.textContent = 'Dark Mode';
+};
 
 darkModeToggle.addEventListener('click', function () {
-    if (theme === 'light') {
+    if (localStorage.getItem('theme') === 'light' || localStorage.getItem('theme') === null) {
         body.classList.add('dark');
         darkModeToggle.classList.add('active');
         darkModeToggle.textContent = 'Light Mode';
-        theme = 'dark';
-        console.log(darkMode);
-    } else if (theme === 'dark') {
+        localStorage.setItem('theme', 'dark')
+        console.log(localStorage.getItem('theme'));
+        
+    } else if (localStorage.getItem('theme') === 'dark') {
         body.classList.remove('dark');
         darkModeToggle.classList.remove('active');
         darkModeToggle.textContent = 'Dark Mode';
-        theme = 'light';
-        console.log(darkMode);
+        localStorage.setItem('theme', 'light');
+        console.log(localStorage.getItem('theme'));
+        
     }
-})
-
-// get local storage. If null, set them to light
+});
