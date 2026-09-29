@@ -1,16 +1,18 @@
 const darkModeToggle = document.querySelector('.dark-mode-toggle');
 const body = document.body;
+const iconDark = document.querySelector('.icon.is-dark');
+const iconLight = document.querySelector('.icon.is-light');
 
 function applyDarkMode() {
     !body.classList.contains('dark') && body.classList.add('dark');
     !darkModeToggle.classList.contains('active') && darkModeToggle.classList.add('active');
-    darkModeToggle.textContent = 'Light Mode';
+    // darkModeToggle.textContent = 'Light Mode';
 };
 
 function applyLightMode() {
     body.classList.contains('dark') && body.classList.remove('dark');
     darkModeToggle.classList.contains('active') && darkModeToggle.classList.remove('active');
-    darkModeToggle.textContent = 'Dark Mode';
+    // darkModeToggle.textContent = 'Dark Mode';
 };
 
 function toggleTheme() {
