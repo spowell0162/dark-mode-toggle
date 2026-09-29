@@ -1,24 +1,26 @@
 const darkModeToggle = document.querySelector('.dark-mode-toggle');
 const body = document.body;
 
-const applyDarkMode = function() {
-    if (!body.classList.contains('dark')) {
-        body.classList.add('dark');
-    };
-    if (!darkModeToggle.classList.contains('active')) {
-        darkModeToggle.classList.add('active');
-    };
+function applyDarkMode() {
+    !body.classList.contains('dark') && body.classList.add('dark');
+    !darkModeToggle.classList.contains('active') && darkModeToggle.classList.add('active');
     darkModeToggle.textContent = 'Light Mode';
 };
 
-const applyLightMode = function() {
-    if (body.classList.contains('dark')) {
-        body.classList.remove('dark');
-    };
-    if (darkModeToggle.classList.contains('active')) {
-        darkModeToggle.classList.remove('active');
-    }
+function applyLightMode() {
+    body.classList.contains('dark') && body.classList.remove('dark');
+    darkModeToggle.classList.contains('active') && darkModeToggle.classList.remove('active');
     darkModeToggle.textContent = 'Dark Mode';
+};
+
+function toggleTheme() {
+    if (localStorage.getItem('theme') === 'light' || localStorage.getItem('theme') === null) {
+        applyDarkMode();
+        localStorage.setItem('theme', 'dark')
+    } else if (localStorage.getItem('theme') === 'dark') {
+        applyLightMode();
+        localStorage.setItem('theme', 'light');
+    };
 };
 
 if (localStorage.getItem('theme') === 'dark') {
@@ -27,14 +29,4 @@ if (localStorage.getItem('theme') === 'dark') {
     applyLightMode();
 };
 
-darkModeToggle.addEventListener('click', function () {
-    if (localStorage.getItem('theme') === 'light' || localStorage.getItem('theme') === null) {
-        applyDarkMode();
-        localStorage.setItem('theme', 'dark')
-    } else if (localStorage.getItem('theme') === 'dark') {
-        applyLightMode();
-        localStorage.setItem('theme', 'light');
-    }
-});
-
-// Code can be cleaner,swapping the if statements with a ternary operator and using a single function to toggle the theme.
+darkModeToggle.addEventListener('click', toggleTheme);
