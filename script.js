@@ -1,18 +1,16 @@
 const darkModeToggle = document.querySelector('.dark-mode-toggle');
 const body = document.body;
-const iconDark = document.querySelector('.icon.is-dark');
-const iconLight = document.querySelector('.icon.is-light');
 
 function applyDarkMode() {
     !body.classList.contains('dark') && body.classList.add('dark');
     !darkModeToggle.classList.contains('active') && darkModeToggle.classList.add('active');
-    // darkModeToggle.textContent = 'Light Mode';
+    darkModeToggle.setAttribute('aria-label', 'Switch to light mode');
 };
 
 function applyLightMode() {
     body.classList.contains('dark') && body.classList.remove('dark');
     darkModeToggle.classList.contains('active') && darkModeToggle.classList.remove('active');
-    // darkModeToggle.textContent = 'Dark Mode';
+    darkModeToggle.setAttribute('aria-label', 'Switch to dark mode');
 };
 
 function toggleTheme() {
